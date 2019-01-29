@@ -1,0 +1,81 @@
+server:
+  port: 8981
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 300
+    max-connections: 200
+    accept-count: 100
+    basedir: /data/cat/cat-alarm
+    accesslog:
+      enabled: true
+
+
+spring:
+  application:
+    name: cat-alarm
+  redis:
+    host: 119.29.161.252
+    port: 6379
+    password: ancda100s
+    database: 3
+  datasource:
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+      useLocalSessionState: true
+      useLocalTransactionState: true
+      rewriteBatchedStatements: true
+      cacheResultSetMetadata: true
+      cacheServerConfiguration: true
+      elideSetAutoCommits: true
+      maintainTimeStats: false
+      hikari:
+          # 定义获取连接的超时时间。最小250ms,默认30s
+          connectionTimeout: 10000
+          # 定义连接空闲时间。最小10s,默认10m
+          idleTimeout: 50000
+          # 定义最小的空闲连接数。推荐不设置。或与最大连接数一致；保持固定的连接数目
+          minimumIdle: 100
+          # 定义最大的连接数。默认10
+          maximumPoolSize: 20
+          # 定义连接的最大生命周期。推荐设置该属性。最小30s，默认30m
+          # spring.datasource.hikari.maxLifeTime=600000
+          maxLifeTime: 600000
+          # 从连接池获取到连接后，进行检查的查询语句。推荐设置该属性。默认值为none
+          connectionTestQuery: select 1
+          connection-init-sql: SET NAMES utf8mb4
+  aop:
+      proxy-target-class: true
+  mvc:
+      favicon:
+          enabled: false
+  jackson:
+      # 序列化日期时以timestamps输出(例如true=1413800730456, false=2014-10-20T10:26:06.604+0000)
+      serialization.write_dates_as_timestamps: true
+      # 使用自定义 date-format 需禁用 write_dates_as_timestamps 才会生效
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+      serialization.fail_on_empty_beans: false
+  messages:
+      #设置国际化配置文件存放在classpath:/i18n目录下
+      basename: i18n/messages
+      #设定加载的资源文件缓存失效时间，-1的话为永不过期，默认为-1
+      cache-duration:
+          seconds: 3600
+
+logging:
+  config: classpath:config/log4j2.xml
+
+qy_weixin:
+  corp_id: ww10ed684f2353e8ef
+  corp_secret: pfLQRq-eD9fDWdpbWbIrgOwRHdMjqRG0rv0zIdBZxjU
+  agent_id: 1000004
+  get_token_url: https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww10ed684f2353e8ef&corpsecret=pfLQRq-eD9fDWdpbWbIrgOwRHdMjqRG0rv0zIdBZxjU
+  send_msg_url: https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={}
+
+cat:
+  alarm_url: http://118.190.239.236:8080/cat/r/p?domain={}&date={}
+  server: 118.190.239.236:8080
+
+
