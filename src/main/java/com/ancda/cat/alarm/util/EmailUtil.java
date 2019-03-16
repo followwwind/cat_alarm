@@ -28,11 +28,11 @@ public class EmailUtil {
             //你的邮件服务器的地址
             htmlEmail.setHostName("smtp.163.com");
             //如果你的邮件服务器设置了密码，请输入密码，否则此语句可以忽略
-            htmlEmail.setAuthentication("18771933975@163.com", "0follow0");
+            htmlEmail.setAuthentication("***@163.com", "***");
             //设置收件人，如果想添加多个收件人，将此语句多写几次即可。
-            htmlEmail.addTo("970720206@qq.com", null);
+            htmlEmail.addTo("***@qq.com", null);
             if(toList != null && !toList.isEmpty()){
-                toList.stream().filter("970720206@qq.com"::equals).forEach(to -> {
+                toList.stream().filter("***@qq.com"::equals).forEach(to -> {
                     try {
                         htmlEmail.addTo(to, null);
                     } catch (EmailException e) {
@@ -41,7 +41,7 @@ public class EmailUtil {
                 });
             }
             //发件人
-            htmlEmail.setFrom("18771933975@163.com", "cat");
+            htmlEmail.setFrom("***@163.com", "cat");
             htmlEmail.setCharset("UTF-8");
             htmlEmail.setSubject(title);
 //            htmlEmail.setMsg("hello welcome");
